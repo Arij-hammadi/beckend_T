@@ -25,19 +25,19 @@ module.exports.getTransporteurById = async (req, res) => {
 
 // Créer un transporteur avec son véhicule
 module.exports.addTransporteur = async (req, res) => {
-    try {
-      const { adresse, modele, capacite, plaqueImmatriculation } = req.body;
-  
-      const transporteur = await Transporteur.create({
-        adresse,
-        vehicule: { modele, capacite, plaqueImmatriculation } // Véhicule intégré
-      });
-  
-      res.status(201).json(transporteur);
-    } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
-  };
+  try {
+    const { adresse, vehicule } = req.body;
+
+    const transporteur = await Transporteur.create({
+      adresse,
+      vehicule
+    });
+
+    res.status(201).json(transporteur);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 // Mettre à jour le véhicule d'un transporteur
 module.exports.updateVehicule = async (req, res) => {
     try {
